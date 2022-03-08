@@ -1,0 +1,49 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "authenticationType": "xsuaa",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/API_BUSINESS_PARTNER/",
+      "destination": "TS_S4P_SYS_USER"
+    },
+    {
+      "authenticationType": "xsuaa",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/",
+      "destination": "TS_S4P_SYS_USER",
+      "cacheControl": "no-cache, no-store, must-revalidate"
+    },
+    {
+      "source": "^/bpmworkflowruntime/(.*)$",
+      "target": "/$1",
+      "service": "com.sap.bpm.workflow",
+      "endpoint": "workflow_rest_url",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/user-api/currentUser$",
+      "target": "/currentUser",
+      "service": "sap-approuter-userapi"
+    },
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
